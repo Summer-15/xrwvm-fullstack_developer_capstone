@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime
 import logging
 import json
 from .restapis import get_request, analyze_review_sentiments, post_review
@@ -46,7 +44,10 @@ def registration(request):
 
     try:
         User.objects.get(username=username)
-        return JsonResponse({"userName": username, "error": "Already Registered"})
+        return JsonResponse({
+            "userName": username,
+            "error": "Already Registered"
+        })
     except User.DoesNotExist:
         user = User.objects.create_user(
             username=username,
@@ -56,7 +57,10 @@ def registration(request):
             email=email
         )
         login(request, user)
-        return JsonResponse({"userName": username, "status": "Authenticated"})
+        return JsonResponse({
+            "userName": username,
+            "status": "Authenticated"
+        })
 
 
 def get_dealerships(request, state="All"):
@@ -96,5 +100,8 @@ def add_review(request):
             return JsonResponse({"status": 200})
         except Exception as e:
             logger.error(f"Error posting review: {e}")
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse({
+                "status": 401,
+                "message": "Error in posting review"
+                })
     return JsonResponse({"status": 403, "message": "Unauthorized"})
