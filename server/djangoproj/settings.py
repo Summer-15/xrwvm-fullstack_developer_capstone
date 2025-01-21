@@ -29,7 +29,8 @@ SECRET_KEY =\
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost', 'https://artemkishuba-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai'
+    'localhost',
+    'https://artemkishuba-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai'
 ]
 CSRF_TRUSTED_ORIGINS = [
     'https://artemkishuba-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai'
